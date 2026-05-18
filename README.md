@@ -13,7 +13,7 @@ REQUISITOS PREVIOS:
 La clase principal (Main) que arranca el programa se encuentra en:
 Paquete: Programa
 Clase: Programa.java
-(Ruta exacta: src/main/java/Programa/Programa.java)
+(Ruta exacta: ```src/main/java/Programa/Programa.java```)
 
 ---------------------------------------------------------
 OPCIÓN 1: EJECUTAR DESDE NETBEANS
@@ -33,12 +33,12 @@ OPCIÓN 2: EJECUTAR DESDE LA TERMINAL
 ---------------------------------------------------------
 1. Abre tu terminal.
 2. Navega hasta la carpeta "src/main/java" dentro del proyecto:
-   cd ruta/al/proyecto/src/main/java
+   ```cd ruta/al/proyecto/src/main/java```
 
 3. Compila todos los archivos Java (esto creará los archivos .class):
-   javac Programa/Programa.java
+   ```javac Programa/Programa.java```
 
 4. Ejecuta el programa indicando el nombre del paquete y la clase:
-   java Programa.Programa
+   ```java Programa.Programa```
 
 =========================================================
