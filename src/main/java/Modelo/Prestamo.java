@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Prestamo extends ModeloBase {
-    private Alumno alumno;
-    private List<Libro> librosPrestados;
-    private LocalDate fechaPrestamo;
-    private LocalDate fechaLimite;
+    private final Alumno alumno;
+    private final List<Libro> librosPrestados;
+    private final LocalDate fechaPrestamo;
+    private final LocalDate fechaLimite;
     private LocalDate fechaDevolucion;
     private double multa;
 

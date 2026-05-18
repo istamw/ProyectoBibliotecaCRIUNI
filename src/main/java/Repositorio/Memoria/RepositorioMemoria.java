@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public abstract class RepositorioMemoria<T extends ModeloBase> implements RepositorioBase<T> {
-    // Uso de Map requerido en las instrucciones
     protected Map<Integer, T> datos = new HashMap<>();
     protected int nextId = 1;
 
@@ -18,14 +17,12 @@ public abstract class RepositorioMemoria<T extends ModeloBase> implements Reposi
         if (entidad.getId() == 0) {
             entidad.setId(nextId++);
         }
-        // El put en un Map sirve tanto para crear (nuevo ID) como para editar (ID existente)
         datos.put(entidad.getId(), entidad);
     }
 
     @Override
     public T buscarPorId(int id) {
         T entidad = datos.get(id);
-        // Solo devolvemos si existe y no ha sido borrado lógicamente
         if (entidad != null && !entidad.isBorrado()) {
             return entidad;
         }
@@ -47,7 +44,6 @@ public abstract class RepositorioMemoria<T extends ModeloBase> implements Reposi
 
     @Override
     public Collection<T> listarTodos() {
-        // Retornamos una Collection filtrando los elementos borrados
         return datos.values().stream()
                 .filter(e -> !e.isBorrado())
                 .collect(Collectors.toList());

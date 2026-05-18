@@ -13,7 +13,6 @@ public class ControladorAlumno {
     }
 
     public void crearAlumno(String nombre, String documento, String email, String telefono, LocalDate fechaNac, String facultad) {
-        // Aquí podrías agregar validaciones de negocio (ej. que el email tenga '@')
         Alumno nuevo = new Alumno(0, nombre, documento, email, telefono, fechaNac, facultad);
         repo.guardar(nuevo);
     }

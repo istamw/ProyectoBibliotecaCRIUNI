@@ -24,7 +24,7 @@ public class ControladorPrestamo {
     }
 
     /**
-     * Códigos de retorno: 0 = Éxito, 1 = Alumno no existe, 2 = Libro no existe, 3 = Libro sin stock
+     * 0 = Correcto, 1 = Alumno no existe, 2 = Libro no existe, 3 = Libro sin stock
      */
     public int crearPrestamo(int alumnoId, List<Integer> libroIds, LocalDate fechaPrestamo, LocalDate fechaLimite) {
         Alumno alumno = alumnoRepo.buscarPorId(alumnoId);
@@ -38,7 +38,6 @@ public class ControladorPrestamo {
             librosAPrestar.add(libro);
         }
 
-        // Lógica de negocio: Descontar stock de libros
         for (Libro libro : librosAPrestar) {
             libro.setStock(libro.getStock() - 1);
             libroRepo.guardar(libro);
@@ -50,7 +49,7 @@ public class ControladorPrestamo {
     }
 
     /**
-     * Códigos de retorno: 0 = Éxito, 1 = Préstamo no encontrado, 2 = Ya devuelto
+     * 0 = Correcto, 1 = Préstamo no encontrado, 2 = ya devuelto
      */
     public int devolverPrestamo(int id, LocalDate fechaDevolucion) {
         Prestamo prestamo = prestamoRepo.buscarPorId(id);
@@ -59,13 +58,13 @@ public class ControladorPrestamo {
 
         prestamo.setFechaDevolucion(fechaDevolucion);
 
-        // Lógica de negocio: Calcular multa ($1000 por cada día de retraso)
+        // Multa por cada dia de retraso = 1000
         if (fechaDevolucion.isAfter(prestamo.getFechaLimite())) {
             long diasRetraso = ChronoUnit.DAYS.between(prestamo.getFechaLimite(), fechaDevolucion);
             prestamo.setMulta(diasRetraso * 1000.0);
         }
 
-        // Lógica de negocio: Devolver el stock a los libros correspondientes
+        // poner en el stock los libros devueltos
         for (Libro libro : prestamo.getLibrosPrestados()) {
             libro.setStock(libro.getStock() + 1);
             libroRepo.guardar(libro);

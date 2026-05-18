@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class SeccionAlumno {
     private final ControladorAlumno controller;
-    private final ControlCLI inputView; // Reutilizamos tu clase anterior para los Scanners
+    private final ControlCLI inputView;
 
     public SeccionAlumno(ControladorAlumno controller, ControlCLI inputView) {
         this.controller = controller;
@@ -46,7 +46,6 @@ public class SeccionAlumno {
         LocalDate fechaNac = inputView.pedirFecha("Fecha Nacimiento");
         String facultad = inputView.pedirString("Facultad: ");
 
-        // Le pasamos los datos al controlador para que él haga el trabajo lógico
         controller.crearAlumno(nombre, doc, email, tel, fechaNac, facultad);
         inputView.mostrarMensaje("Alumno registrado con exito!");
     }
@@ -55,14 +54,12 @@ public class SeccionAlumno {
         mostrarTablaAlumnos();
         int id = inputView.pedirInt("Ingrese ID del alumno a editar: ");
 
-        // Le pedimos el alumno al controlador solo para mostrar sus datos actuales
         Alumno a = controller.obtenerAlumno(id);
 
         if (a != null) {
             String nuevoNombre = inputView.pedirString("Nuevo Nombre (" + a.getNombreCompleto() + "): ");
             String nuevoEmail = inputView.pedirString("Nuevo Email (" + a.getEmail() + "): ");
 
-            // El controlador hace la actualización
             controller.editarAlumno(id, nuevoNombre, nuevoEmail);
             inputView.mostrarMensaje("Alumno actualizado.");
         } else {
@@ -82,10 +79,8 @@ public class SeccionAlumno {
     }
 
     private void mostrarTablaAlumnos() {
-        // Pedimos la lista cruda al controlador
         Collection<Alumno> alumnos = controller.obtenerTodosLosAlumnos();
 
-        // La vista formatea y dibuja
         inputView.mostrarMensaje("\n--- LISTA DE ALUMNOS ---");
         System.out.printf("%-5s | %-25s | %-15s | %-20s | %-15s%n", "ID", "NOMBRE", "DOCUMENTO", "EMAIL", "FACULTAD");
         inputView.separador();

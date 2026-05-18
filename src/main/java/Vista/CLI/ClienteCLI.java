@@ -2,7 +2,7 @@ package Vista.CLI;
 
 public class ClienteCLI {
     private final SeccionLibro libroView;
-    private final SeccionAlumno alumnoView; // La vista de alumnos hecha en el ejemplo anterior
+    private final SeccionAlumno alumnoView;
     private final SeccionPrestamo prestamoView;
     private final ControlCLI cv;
 
