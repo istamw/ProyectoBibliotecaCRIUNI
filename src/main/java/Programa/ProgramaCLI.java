@@ -16,7 +16,7 @@ import Vista.CLI.SeccionLibro;
 import Vista.CLI.SeccionPrestamo;
 import Vista.CLI.ClienteCLI;
 
-public class Programa {
+public class ProgramaCLI {
     public static void main(String[] args) {
         // inicializar repositorios
         RepositorioBase<Libro> libroRepo = new RepositorioLibro();
