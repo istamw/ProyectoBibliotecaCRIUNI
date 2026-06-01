@@ -16,6 +16,18 @@ public class ControlCLI {
     public String pedirString(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine().trim();
+    } 
+
+    //Sobrecarga para poder dejar vacio y dejar el valor anterior
+    public String pedirString(String mensaje, String textoAnterior) {
+        System.out.print(mensaje);
+        String texto = scanner.nextLine().trim();
+
+        if (texto.isBlank()) {
+            return textoAnterior;
+        } else {
+            return texto;
+        }
     }
 
     public int pedirInt(String mensaje) {
@@ -23,6 +35,23 @@ public class ControlCLI {
             try {
                 System.out.print(mensaje);
                 return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                mostrarError("Entrada invalida. Ingrese un numero entero.");
+            }
+        }
+    }
+
+    //Sobrecarga para poder dejar vacio y dejar el valor anterior
+    public int pedirInt(String mensaje, int numeroAnterior) {
+        while (true) {
+            try {
+                System.out.print(mensaje);
+                String entrada = scanner.nextLine().trim();
+                if (entrada.isBlank()) {
+                    return numeroAnterior;
+                } else {
+                    return Integer.parseInt(entrada);
+                }
             } catch (NumberFormatException e) {
                 mostrarError("Entrada invalida. Ingrese un numero entero.");
             }

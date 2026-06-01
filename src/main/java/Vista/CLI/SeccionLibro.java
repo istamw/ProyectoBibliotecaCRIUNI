@@ -40,7 +40,7 @@ public class SeccionLibro {
         cv.mostrarMensaje("\n--- Registrar Nuevo Libro ---");
         String titulo = cv.pedirString("Titulo: ");
         String editorial = cv.pedirString("Editorial: ");
-        int anho = cv.pedirInt("Anho Publicacion: ");
+        int anho = cv.pedirInt("Año Publicacion: ");
         String autor = cv.pedirString("Autor: ");
         int stock = cv.pedirInt("Stock Inicial: ");
 
@@ -52,11 +52,11 @@ public class SeccionLibro {
         int id = cv.pedirInt("Ingrese el ID del libro a editar: ");
         Libro l = controller.obtenerLibro(id);
         if (l != null) {
-            String titulo = cv.pedirString("Nuevo Titulo (" + l.getTitulo() + "): ");
-            String ed = cv.pedirString("Nueva Editorial (" + l.getEditorial() + "): ");
-            int anho = cv.pedirInt("Nuevo Anho (" + l.getAnhoPublicacion() + "): ");
-            String autor = cv.pedirString("Nuevo Autor (" + l.getAutor() + "): ");
-            int stock = cv.pedirInt("Nuevo Stock (" + l.getStock() + "): ");
+            String titulo = cv.pedirString("Nuevo Titulo (" + l.getTitulo() + "): ", l.getTitulo());
+            String ed = cv.pedirString("Nueva Editorial (" + l.getEditorial() + "): ", l.getEditorial());
+            int anho = cv.pedirInt("Nuevo Anho (" + l.getAnhoPublicacion() + "): ", l.getAnhoPublicacion());
+            String autor = cv.pedirString("Nuevo Autor (" + l.getAutor() + "): ", l.getAutor());
+            int stock = cv.pedirInt("Nuevo Stock (" + l.getStock() + "): ", l.getStock());
 
             controller.editarLibro(id, titulo, ed, anho, autor, stock);
             cv.mostrarMensaje("Libro actualizado correctamente.");

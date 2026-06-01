@@ -53,12 +53,11 @@ public class SeccionAlumno {
     private void mostrarFormularioEditar() {
         mostrarTablaAlumnos();
         int id = inputView.pedirInt("Ingrese ID del alumno a editar: ");
-
         Alumno a = controller.obtenerAlumno(id);
 
         if (a != null) {
-            String nuevoNombre = inputView.pedirString("Nuevo Nombre (" + a.getNombreCompleto() + "): ");
-            String nuevoEmail = inputView.pedirString("Nuevo Email (" + a.getEmail() + "): ");
+            String nuevoNombre = inputView.pedirString("Nuevo Nombre (" + a.getNombreCompleto() + "): ", a.getNombreCompleto());
+            String nuevoEmail = inputView.pedirString("Nuevo Email (" + a.getEmail() + "): ", a.getEmail());
 
             controller.editarAlumno(id, nuevoNombre, nuevoEmail);
             inputView.mostrarMensaje("Alumno actualizado.");
