@@ -5,10 +5,11 @@ import Repositorio.RepositorioBase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public abstract class RepositorioMemoria<T extends ModeloBase> implements RepositorioBase<T> {
+public abstract class RepositorioMemoria<T extends ModeloBase> implements RepositorioBase<T>, Serializable {
     protected Map<Integer, T> datos = new HashMap<>();
     protected int nextId = 1;
 

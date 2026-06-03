@@ -55,7 +55,7 @@ public class SeccionAlumno {
         int id = inputView.pedirInt("Ingrese ID del alumno a editar: ");
         Alumno a = controller.obtenerAlumno(id);
 
-        if (a != null) {
+        if (a != null) { 
             String nuevoNombre = inputView.pedirString("Nuevo Nombre (" + a.getNombreCompleto() + "): ", a.getNombreCompleto());
             String nuevoEmail = inputView.pedirString("Nuevo Email (" + a.getEmail() + "): ", a.getEmail());
 

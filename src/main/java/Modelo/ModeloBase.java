@@ -1,6 +1,8 @@
 package Modelo;
 
-public abstract class ModeloBase {
+import java.io.Serializable;
+
+public abstract class ModeloBase implements Serializable {
     private int id = 0;
     private boolean borrado = false;
     private String modificadoPor = null;

@@ -45,7 +45,7 @@ public class SeccionPrestamo {
 
     private void formularioCrear() {
         cv.mostrarMensaje("\n--- Nueva Solicitud de Prestamo ---");
-        int alumnoId = cv.pedirInt("ID del Alumno solicitante: ");
+        String alumnoDoc = cv.pedirString("Documento del Alumno solicitante: ");
 
         List<Integer> libroIds = new ArrayList<>();
         boolean agregarMas = true;
@@ -59,7 +59,7 @@ public class SeccionPrestamo {
         LocalDate fPrestamo = cv.pedirFecha("Fecha del Prestamo");
         LocalDate fLimite = cv.pedirFecha("Fecha Limite de Entrega");
 
-        int respuesta = controller.crearPrestamo(alumnoId, libroIds, fPrestamo, fLimite);
+        int respuesta = controller.crearPrestamo(alumnoDoc, libroIds, fPrestamo, fLimite);
         switch (respuesta) {
             case 0 -> cv.mostrarMensaje("Prestamo registrado y stock actualizado.");
             case 1 -> cv.mostrarError("El Alumno especificado no existe.");
@@ -70,9 +70,9 @@ public class SeccionPrestamo {
 
     private void formularioDevolver() {
         int id = cv.pedirInt("Ingrese el ID del Prestamo a devolver: ");
-        LocalDate fDevolucion = cv.pedirFecha("Fecha Real de Devolucion");
 
-        int res = controller.devolverPrestamo(id, fDevolucion);
+
+        int res = controller.devolverPrestamo(id);
         if (res == 0) {
             cv.mostrarMensaje("Devolucion asentada con exito.");
         } else if (res == 1) {
@@ -92,8 +92,7 @@ public class SeccionPrestamo {
     }
 
     private void informeVencidos() {
-        LocalDate hoy = cv.pedirFecha("Ingrese la fecha de control para calcular vencimientos");
-        mostrarTablaPrestamos(controller.obtenerPrestamosVencidos(hoy), "INFORME DE PRESTAMOS VENCIDOS");
+        mostrarTablaPrestamos(controller.obtenerPrestamosVencidos(), "INFORME DE PRESTAMOS VENCIDOS");
     }
 
     private void mostrarTablaPrestamos(Collection<Prestamo> lista, String titulo) {

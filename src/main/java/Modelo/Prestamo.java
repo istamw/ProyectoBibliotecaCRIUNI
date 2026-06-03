@@ -11,6 +11,8 @@ public class Prestamo extends ModeloBase {
     private LocalDate fechaDevolucion;
     private double multa;
 
+    private boolean estaDevuelto = false;
+
     public Prestamo(int id, Alumno alumno, List<Libro> librosPrestados, LocalDate fechaPrestamo, LocalDate fechaLimite) {
         super(id);
         this.alumno = alumno;
@@ -30,6 +32,8 @@ public class Prestamo extends ModeloBase {
     public void setFechaDevolucion(LocalDate fechaDevolucion) { this.fechaDevolucion = fechaDevolucion; }
     public double getMulta() { return multa; }
     public void setMulta(double multa) { this.multa = multa; }
+    public boolean getEstaDevuelto() {return estaDevuelto;}
+    public void setEstaDevuelto(boolean b) {estaDevuelto = b;}
 
     public boolean estaVencido(LocalDate fechaActual) {
         return fechaDevolucion == null && fechaActual.isAfter(fechaLimite);

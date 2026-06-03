@@ -1,15 +1,17 @@
 package Controlador;
 
 import Modelo.Alumno;
-import Repositorio.RepositorioBase;
+import Repositorio.RepositorioPersistente;
+import Repositorio.Memoria.RepositorioAlumno;
+
 import java.time.LocalDate;
 import java.util.Collection;
 
 public class ControladorAlumno {
-    private final RepositorioBase<Alumno> repo;
+    private RepositorioAlumno repo;
 
-    public ControladorAlumno(RepositorioBase<Alumno> repo) {
-        this.repo = repo;
+    public ControladorAlumno(RepositorioPersistente repo) {
+        this.repo = (RepositorioAlumno) repo.getRepoAlumno();
     }
 
     public void crearAlumno(String nombre, String documento, String email, String telefono, LocalDate fechaNac, String facultad) {
@@ -22,6 +24,21 @@ public class ControladorAlumno {
         if (a != null) {
             a.setNombreCompleto(nuevoNombre);
             a.setEmail(nuevoEmail);
+            repo.guardar(a);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean editarAlumno(int id, String nuevoNombre, String doc, String nuevoEmail, String telefono, LocalDate fechaNac, String facultad) {
+        Alumno a = repo.buscarPorId(id);
+        if (a != null) {
+            a.setNombreCompleto(nuevoNombre);
+            a.setNroDocumento(doc);
+            a.setEmail(nuevoEmail);
+            a.setTelefono(telefono);
+            a.setFechaNacimiento(fechaNac);
+            a.setFacultad(facultad);
             repo.guardar(a);
             return true;
         }
@@ -42,5 +59,13 @@ public class ControladorAlumno {
 
     public Alumno obtenerAlumno(int id) {
         return repo.buscarPorId(id);
+    }
+
+    public Alumno obtenerAlumno(String doc) {
+        return repo.buscarPorDocumento(doc);
+    }
+
+    public void setRepositorio(RepositorioAlumno repositorio) {
+        this.repo = repositorio;
     }
 }

@@ -1,14 +1,16 @@
 package Controlador;
 
 import Modelo.Libro;
-import Repositorio.RepositorioBase;
+import Repositorio.RepositorioPersistente;
+import Repositorio.Memoria.RepositorioLibro;
+
 import java.util.Collection;
 
 public class ControladorLibro {
-    private final RepositorioBase<Libro> repo;
+    private RepositorioLibro repo;
 
-    public ControladorLibro(RepositorioBase<Libro> repo) {
-        this.repo = repo;
+    public ControladorLibro(RepositorioPersistente repo) {
+        this.repo = (RepositorioLibro) repo.getRepoLibro();
     }
 
     public void crearLibro(String titulo, String editorial, int anho, String autor, int stock) {
@@ -44,5 +46,9 @@ public class ControladorLibro {
 
     public Libro obtenerLibro(int id) {
         return repo.buscarPorId(id);
+    }
+
+    public void setRepositorio(RepositorioLibro repositorio) {
+        this.repo = repositorio;
     }
 }

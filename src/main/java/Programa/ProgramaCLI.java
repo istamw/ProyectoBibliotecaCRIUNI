@@ -10,6 +10,7 @@ import Repositorio.Memoria.RepositorioAlumno;
 import Repositorio.Memoria.RepositorioLibro;
 import Repositorio.Memoria.RepositorioPrestamo;
 import Repositorio.RepositorioBase;
+import Repositorio.RepositorioPersistente;
 import Vista.CLI.SeccionAlumno;
 import Vista.CLI.ControlCLI;
 import Vista.CLI.SeccionLibro;
@@ -23,10 +24,13 @@ public class ProgramaCLI {
         RepositorioBase<Alumno> alumnoRepo = new RepositorioAlumno();
         RepositorioBase<Prestamo> prestamoRepo = new RepositorioPrestamo();
 
+        //Repo Principal (Persistente)
+        RepositorioPersistente repoPrincipal = new RepositorioPersistente(libroRepo, alumnoRepo, prestamoRepo);
+
         // inicializar controladores
-        ControladorLibro libroController = new ControladorLibro(libroRepo);
-        ControladorAlumno alumnoController = new ControladorAlumno(alumnoRepo);
-        ControladorPrestamo prestamoController = new ControladorPrestamo(prestamoRepo, alumnoRepo, libroRepo);
+        ControladorLibro libroController = new ControladorLibro(repoPrincipal);
+        ControladorAlumno alumnoController = new ControladorAlumno(repoPrincipal);
+        ControladorPrestamo prestamoController = new ControladorPrestamo(repoPrincipal);
 
         // inicializar vistas
         ControlCLI consolaView = new ControlCLI();
